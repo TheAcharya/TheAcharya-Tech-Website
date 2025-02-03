@@ -179,19 +179,47 @@ header {
     position: absolute;
     top: 20px;
     right: 20px;
-    padding: 0.8rem 1.5rem;
-    background: transparent;
     color: var(--text-color);
     text-decoration: none;
-    font-weight: 500;
-    border: 1px solid var(--text-color);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .sponsor-button:hover {
-    background: var(--text-color);
-    color: var(--bg-color);
+    transform: scale(1.1);
+}
+
+.sponsor-button svg {
+    width: 32px;
+    height: 32px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+}
+
+.sponsor-button:hover svg {
+    fill: var(--text-color);
+}
+
+/* Optional tooltip style */
+.sponsor-button::after {
+    content: "Sponsor Us";
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.sponsor-button:hover::after {
+    opacity: 1;
 }
 
 /* Preloader */
