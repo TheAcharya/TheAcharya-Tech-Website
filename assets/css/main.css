@@ -222,34 +222,6 @@ header {
     opacity: 1;
 }
 
-/* Preloader */
-.preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--bg-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: opacity 0.5s ease;
-}
-
-.preloader.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.preloader-spinner {
-    border: 4px solid var(--text-color);
-    border-top: 4px solid transparent;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-}
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
@@ -298,3 +270,102 @@ header {
         -webkit-touch-callout: none;
     }
 }
+
+/* Adjustments */
+.preloader {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-color);
+    transition: z-index 0s .2s ease;
+  }
+  
+  .preloader__content {
+    width: 100%;
+    transition: all 0.2s ease;
+  }
+  
+  .preloader__icon img {
+    width: 526px;
+    height: 50px;
+    transition: all 0.2s ease;
+  }
+  
+  .preloader__bar {
+    margin-top: 60px;
+    width: 100%;
+    height: 2px;
+    display: block;
+    background: #39393b;
+  }
+  
+  .preloader__progress {
+    width: 0%;
+    height: 2px;
+    display: block;
+    background: #fff;
+    left: 0;
+  }
+  
+  .preloader.loaded {
+    z-index: -1;
+  }
+  
+  .preloader.loaded .preloader__content {
+    opacity: 0;
+  }
+  
+  @media (max-width: 750px) {
+    .preloader__icon img {
+      width: 400px;
+      height: 38px;
+    }
+    .preloader__content {
+      top: calc(50% - 20px);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .preloader__icon img {
+      width: 280px;
+      height: 27px;
+    }
+    .preloader__bar {
+      margin-top: 35px;
+    }
+  }
+  
+  
+  .pos--fix {
+    position: fixed;
+  }
+  
+  .z--max {
+    z-index: 999;
+  }
+  
+
+  .align--center {
+    text-align: center;
+  }
+  
+  .pos--abs {
+    position: absolute;
+  }
+  
+  .center--y {
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  
+  .z--2 {
+    z-index: 2;
+  }
+  
+  
+  .pos--rel {
+    position: relative;
+  }
+  

@@ -83,15 +83,20 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KNBPPX82"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-spinner"></div>
-    </div>
+    <section class="preloader pos--fix z--max">
+        <div class="preloader__content align--center pos--abs center--y z--2">
+        <div class="preloader__icon">
+            <img src="/assets/svgs/the-acharya-logo.svg" alt="">
+        </div>
+        <div class="preloader__bar pos--rel">
+            <div class="preloader__progress pos--abs"></div>
+        </div>
+        </div><!-- content -->
+    </section><!-- preloader -->
 
     <div class="container">
         <header>
             <!-- Sponsor Button -->
-            
             <a href="https://github.com/sponsors/TheAcharya" class="sponsor-button" target="_blank">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -163,14 +168,10 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
                 </div>
             </article>
         </div>
+       
     </div>
-
-    <script>
-        // Preloader Script
-        window.addEventListener('load', function() {
-            const preloader = document.querySelector('.preloader');
-            preloader.classList.add('hidden');
-        });
-    </script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/modules.min.js"></script>
+    <script src="/assets/js/scripts.js"></script>
 </body>
 </html>
