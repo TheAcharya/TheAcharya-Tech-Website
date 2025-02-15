@@ -34,13 +34,17 @@ header {
 }
 
 .logo-container {
-    max-width: 400px;
-    margin: 0 auto 2rem;
+    max-width: 600px;
+    margin: 0 auto 5rem;
 }
 
 .logo-container img {
     width: 100%;
     height: auto;
+}
+
+.logo-container img:hover {
+    opacity: 50%;
 }
 
 .portfolio-description {
