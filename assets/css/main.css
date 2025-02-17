@@ -23,12 +23,31 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+}
+
+.outer-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+  padding: 0rem 3rem 3rem;
+}
+
+  
+@media (max-width: 960px) {
+
+}
+
+@media (max-width: 500px) {
+  .outer-container {
+    padding: 0rem 0rem 3rem;
+  }
 }
 
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem 3rem;
+    padding: 3rem 8rem;
 }
 
 header {
@@ -37,9 +56,22 @@ header {
     position: relative;
 }
 
+.sub-header {
+  font-size: 24px;
+  font-weight: 500;
+  padding-bottom: 3rem;
+}
+
+@media (max-width: 500px) {
+  .sub-header {
+    font-size: 18px;
+  }
+  
+}
+
 .logo-container {
-    max-width: 600px;
-    margin: 0 auto 5rem;
+    max-width: 750px;
+    margin: 0 auto 3rem;
 }
 
 .logo-container img {
@@ -52,20 +84,20 @@ header {
 }
 
 .portfolio-description {
-    max-width: 1200px;
     margin: 0 auto;
     text-align: center;
     font-size: 1.0rem;
     line-height: 1.8;
     opacity: 0.9;
     font-weight: 400;
+    padding-bottom: 1rem;
 }
 
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
-    padding: 3rem 0;
+    /* padding: 3rem 0; */
 }
 
 .project-card {
@@ -185,7 +217,7 @@ header {
 /* Sponsor Button */
 .sponsor-button {
     position: absolute;
-    top: 20px;
+    top: 4rem;
     right: 0px;
     color: var(--text-color);
     text-decoration: none;
@@ -236,6 +268,14 @@ header {
     100% { transform: rotate(360deg); }
 }
 
+@media (max-width: 1920px) {
+  .sponsor-button {
+    right: 30px;
+    /* padding: 0.6rem 1rem; */
+}
+
+}
+
 @media (max-width: 1024px) {
     .container {
         padding: 2rem;
@@ -244,7 +284,7 @@ header {
 
 @media (max-width: 768px) {
     .container {
-        padding: 1.5rem;
+        padding: 1.5rem 1.5rem 3rem;
     }
 
     .projects-grid {
@@ -264,7 +304,7 @@ header {
 
     .sponsor-button {
         top: 10px;
-        right: -20px;
+        right: 30px;
         padding: 0.6rem 1rem;
     }
 }
@@ -418,7 +458,11 @@ header {
   .socials__link svg {
     height: 15px;
   }
-  
+
+  .socials__link.bigger-link img {
+    width: 32px; 
+    height: auto;
+}
   @media (max-width: 1200px) {
     .socials {
       margin-right: 30px;
@@ -439,8 +483,7 @@ header {
   
     .socials {
       float: none;
-      margin-right: 0;
-      margin-bottom: 20px;
+      margin-right: 20px;
     }
   
     .privacy {
