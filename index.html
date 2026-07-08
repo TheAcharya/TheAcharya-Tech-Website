@@ -99,6 +99,13 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
         </a>
+        <!-- Contact Button -->
+        <button type="button" id="contact-trigger" class="contact-button" aria-label="Contact" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="4" width="20" height="16"/>
+                <path d="M2 6 L12 13 L22 6"/>
+            </svg>
+        </button>
         <div class="container">
             <header>
                 <!-- Sponsor Button -->
@@ -266,6 +273,165 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
     
        
     </div>
+    <!-- Contact Modal -->
+    <div id="contact-modal-overlay" class="contact-modal-overlay" hidden>
+        <div class="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title">
+            <button type="button" id="contact-modal-close" class="contact-modal-close" aria-label="Close">&times;</button>
+            <h2 id="contact-modal-title" class="contact-modal-title">Get in touch</h2>
+            <p class="contact-modal-intro">Have a question or an idea? Send us a message and we'll get back to you.</p>
+            <form id="contact-form" class="contact-form" novalidate>
+                <div class="contact-form-row">
+                    <div class="contact-field">
+                        <label for="cf-first-name">First name</label>
+                        <input type="text" id="cf-first-name" name="firstName" required>
+                    </div>
+                    <div class="contact-field">
+                        <label for="cf-last-name">Last name</label>
+                        <input type="text" id="cf-last-name" name="lastName" required>
+                    </div>
+                </div>
+                <div class="contact-field">
+                    <label for="cf-email">Email</label>
+                    <input type="email" id="cf-email" name="email" required>
+                </div>
+                <div class="contact-field">
+                    <label for="cf-subject">Subject</label>
+                    <input type="text" id="cf-subject" name="subject" required>
+                </div>
+                <div class="contact-field">
+                    <label for="cf-message">Message</label>
+                    <textarea id="cf-message" name="message" rows="5" required></textarea>
+                </div>
+                <div class="contact-field">
+                    <label for="cf-challenge">Verification</label>
+                    <div class="contact-challenge">
+                        <span class="contact-challenge-code" id="cf-challenge-code" aria-hidden="true">000000</span>
+                        <button type="button" class="contact-challenge-refresh" id="cf-challenge-refresh" aria-label="Generate a new code" title="New code">&#8635;</button>
+                    </div>
+                    <input type="text" id="cf-challenge" name="challenge" inputmode="numeric" autocomplete="off" placeholder="Type the 6-digit code shown above" required>
+                </div>
+                <!-- Honeypot field, hidden from real visitors, catches basic bots -->
+                <div class="contact-honeypot" aria-hidden="true">
+                    <label for="cf-website">Website</label>
+                    <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                <button type="submit" id="contact-submit-btn" class="contact-submit-btn">Send message</button>
+                <p id="contact-status" class="contact-status" role="status"></p>
+            </form>
+        </div>
+    </div>
+    <!-- Contact Widget Logic -->
+    <script>
+        (function () {
+            var CONTACT_API_URL = "https://the-acharya-tech-website-resend.vercel.app/api/contact";
+
+            var overlay = document.getElementById("contact-modal-overlay");
+            var trigger = document.getElementById("contact-trigger");
+            var closeBtn = document.getElementById("contact-modal-close");
+            var form = document.getElementById("contact-form");
+            var submitBtn = document.getElementById("contact-submit-btn");
+            var status = document.getElementById("contact-status");
+            var challengeCodeEl = document.getElementById("cf-challenge-code");
+            var challengeRefreshBtn = document.getElementById("cf-challenge-refresh");
+
+            // Client-side bot deterrent: a random 6-digit code the visitor must
+            // retype. Never sent to the server, carries no information.
+            var currentChallenge = "";
+            function newChallenge() {
+                currentChallenge = String(Math.floor(100000 + Math.random() * 900000));
+                challengeCodeEl.textContent = currentChallenge;
+            }
+            newChallenge();
+
+            challengeRefreshBtn.addEventListener("click", function () {
+                newChallenge();
+                form.challenge.value = "";
+            });
+
+            function openModal() {
+                newChallenge();
+                overlay.hidden = false;
+                document.body.style.overflow = "hidden";
+                requestAnimationFrame(function () { overlay.classList.add("is-open"); });
+            }
+
+            function closeModal() {
+                overlay.classList.remove("is-open");
+                document.body.style.overflow = "";
+                setTimeout(function () { overlay.hidden = true; }, 250);
+            }
+
+            trigger.addEventListener("click", openModal);
+            closeBtn.addEventListener("click", closeModal);
+            overlay.addEventListener("click", function (e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Escape" && !overlay.hidden) closeModal();
+            });
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+                status.textContent = "";
+                status.className = "contact-status";
+
+                // Honeypot: if a bot filled the hidden field, silently drop it
+                if (form.website.value) return;
+
+                // Verify the 6-digit challenge code (client-side only)
+                if (form.challenge.value.trim() !== currentChallenge) {
+                    status.textContent = "The verification code doesn't match. Please type the 6-digit code shown above.";
+                    status.className = "contact-status error";
+                    newChallenge();
+                    form.challenge.value = "";
+                    return;
+                }
+
+                var payload = {
+                    firstName: form.firstName.value.trim(),
+                    lastName: form.lastName.value.trim(),
+                    email: form.email.value.trim(),
+                    subject: form.subject.value.trim(),
+                    message: form.message.value.trim()
+                };
+
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Sending...";
+
+                fetch(CONTACT_API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+                    .then(function (res) {
+                        return res.json()
+                            .catch(function () { return {}; })
+                            .then(function (data) { return { ok: res.ok, data: data }; });
+                    })
+                    .then(function (result) {
+                        if (!result.ok) {
+                            status.textContent =
+                                (result.data && result.data.error) ||
+                                "Something went wrong, please try again shortly.";
+                            status.className = "contact-status error";
+                            return;
+                        }
+                        status.textContent = "Message sent, thank you. We'll get back to you soon.";
+                        status.className = "contact-status success";
+                        form.reset();
+                        newChallenge();
+                    })
+                    .catch(function () {
+                        status.textContent = "Something went wrong, please try again shortly.";
+                        status.className = "contact-status error";
+                    })
+                    .finally(function () {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Send message";
+                    });
+            });
+        })();
+    </script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/modules.min.js"></script>
     <script src="/assets/js/scripts.js"></script>
