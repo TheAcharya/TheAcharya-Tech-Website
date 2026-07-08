@@ -296,7 +296,12 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
                 </div>
                 <div class="contact-field">
                     <label for="cf-subject">Subject</label>
-                    <input type="text" id="cf-subject" name="subject" required>
+                    <select id="cf-subject" name="subject" required>
+                        <option value="" disabled selected>Select a subject</option>
+                        <!-- To add more subjects later, copy a line below and change the text. -->
+                        <option value="General Enquiry">General Enquiry</option>
+                        <option value="GitHub Projects">GitHub Projects</option>
+                    </select>
                 </div>
                 <div class="contact-field">
                     <label for="cf-message">Message</label>
@@ -306,9 +311,9 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
                     <label for="cf-challenge">Verification</label>
                     <div class="contact-challenge">
                         <span class="contact-challenge-code" id="cf-challenge-code" aria-hidden="true">000000</span>
+                        <input type="text" id="cf-challenge" name="challenge" inputmode="numeric" autocomplete="off" placeholder="Type the code" required>
                         <button type="button" class="contact-challenge-refresh" id="cf-challenge-refresh" aria-label="Generate a new code" title="New code">&#8635;</button>
                     </div>
-                    <input type="text" id="cf-challenge" name="challenge" inputmode="numeric" autocomplete="off" placeholder="Type the 6-digit code shown above" required>
                 </div>
                 <!-- Honeypot field, hidden from real visitors, catches basic bots -->
                 <div class="contact-honeypot" aria-hidden="true">

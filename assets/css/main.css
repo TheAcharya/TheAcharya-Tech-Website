@@ -504,7 +504,7 @@ header {
 /* Contact Button (sits just below the sponsor "heart" button) */
 .contact-button {
     position: absolute;
-    top: 7.5rem;
+    top: 10rem;
     right: 0px;
     color: var(--text-color);
     background: none;
@@ -557,10 +557,13 @@ header {
     }
 }
 
+/* On mobile the sponsor button gains padding (0.6rem 1rem); mirror it so the
+   two icons line up on the same vertical axis, and sit further apart. */
 @media (max-width: 768px) {
     .contact-button {
-        top: 58px;
+        top: 76px;
         right: 30px;
+        padding: 0.6rem 1rem;
     }
 }
 
@@ -644,6 +647,7 @@ header {
 .contact-field {
     margin-bottom: 1.1rem;
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
 }
@@ -656,6 +660,7 @@ header {
 }
 
 .contact-field input,
+.contact-field select,
 .contact-field textarea {
     background: transparent;
     color: var(--text-color);
@@ -672,6 +677,7 @@ header {
 }
 
 .contact-field input:focus,
+.contact-field select:focus,
 .contact-field textarea:focus {
     outline: none;
     border-color: var(--text-color);
@@ -682,34 +688,57 @@ header {
     min-height: 120px;
 }
 
-/* Challenge (6-digit verification code) */
+/* Subject dropdown: dark theme + custom caret */
+.contact-field select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+}
+
+.contact-field select option {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Challenge (6-digit verification code) — code, input and refresh on one line */
 .contact-challenge {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 0.9rem;
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.03);
+    align-items: stretch;
+    gap: 0.6rem;
 }
 
 .contact-challenge-code {
-    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 1.15rem;
     font-weight: 600;
-    letter-spacing: 0.4em;
-    padding-left: 0.4em;
+    letter-spacing: 0.3em;
+    padding: 0 0.75rem 0 1rem;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.03);
     user-select: none;
     -webkit-user-select: none;
 }
 
+.contact-challenge input {
+    flex: 1;
+    min-width: 0;
+}
+
 .contact-challenge-refresh {
+    flex: 0 0 auto;
     background: none;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     color: var(--text-color);
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     line-height: 1;
-    padding: 0;
+    padding: 0 0.85rem;
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s ease, transform 0.3s ease;
@@ -774,7 +803,8 @@ header {
 
 .contact-status {
     margin-top: 1rem;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
     min-height: 1.2em;
     font-weight: 500;
 }
