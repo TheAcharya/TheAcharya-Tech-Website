@@ -304,7 +304,8 @@ header {
 
     .sponsor-button {
         top: 10px;
-        right: 30px;
+        left: 30px;
+        right: auto;
         padding: 0.6rem 1rem;
     }
 }
@@ -557,11 +558,12 @@ header {
     }
 }
 
-/* On mobile the sponsor button gains padding (0.6rem 1rem); mirror it so the
-   two icons line up on the same vertical axis, and sit further apart. */
+/* On mobile the sponsor "heart" moves to the top-left, and the email button
+   takes the sponsor's old top-right spot. Mirror the sponsor's mobile padding
+   so both icons sit at the same height. */
 @media (max-width: 768px) {
     .contact-button {
-        top: 100px;
+        top: 10px;
         right: 30px;
         padding: 0.6rem 1rem;
     }
