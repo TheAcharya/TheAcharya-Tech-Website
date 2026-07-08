@@ -504,7 +504,7 @@ header {
 /* Contact Button (sits just below the sponsor "heart" button) */
 .contact-button {
     position: absolute;
-    top: 10rem;
+    top: 8.5rem;
     right: 0px;
     color: var(--text-color);
     background: none;
@@ -561,7 +561,7 @@ header {
    two icons line up on the same vertical axis, and sit further apart. */
 @media (max-width: 768px) {
     .contact-button {
-        top: 76px;
+        top: 100px;
         right: 30px;
         padding: 0.6rem 1rem;
     }

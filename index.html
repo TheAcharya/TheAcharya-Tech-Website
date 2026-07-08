@@ -383,21 +383,41 @@ karmaṇy-evādhikāras te mā phaleṣhu kadāchana mā karma-phala-hetur bhūr
                 // Honeypot: if a bot filled the hidden field, silently drop it
                 if (form.website.value) return;
 
+                // Client-side validation
+                var firstName = form.firstName.value.trim();
+                var lastName = form.lastName.value.trim();
+                var email = form.email.value.trim();
+                var subject = form.subject.value;
+                var message = form.message.value.trim();
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                function fail(msg, field) {
+                    status.textContent = msg;
+                    status.className = "contact-status error";
+                    if (field) field.focus();
+                }
+
+                if (!firstName) return fail("Please enter your first name.", form.firstName);
+                if (!lastName) return fail("Please enter your last name.", form.lastName);
+                if (!email) return fail("Please enter your email address.", form.email);
+                if (!emailPattern.test(email)) return fail("Please enter a valid email address.", form.email);
+                if (!subject) return fail("Please select a subject.", form.subject);
+                if (!message) return fail("Please enter a message.", form.message);
+
                 // Verify the 6-digit challenge code (client-side only)
                 if (form.challenge.value.trim() !== currentChallenge) {
-                    status.textContent = "The verification code doesn't match. Please type the 6-digit code shown above.";
-                    status.className = "contact-status error";
+                    fail("The verification code doesn't match. Please type the 6-digit code shown above.", form.challenge);
                     newChallenge();
                     form.challenge.value = "";
                     return;
                 }
 
                 var payload = {
-                    firstName: form.firstName.value.trim(),
-                    lastName: form.lastName.value.trim(),
-                    email: form.email.value.trim(),
-                    subject: form.subject.value.trim(),
-                    message: form.message.value.trim()
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    subject: subject,
+                    message: message
                 };
 
                 submitBtn.disabled = true;
