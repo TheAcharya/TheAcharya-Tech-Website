@@ -1,8 +1,7 @@
 var blurElement = { a: 6 };
 
 function iconBlur() {
-  console.log(blurElement.a);
-  TweenMax.set(['.preloader__icon svg'], {
+  TweenMax.set(['.preloader__icon img'], {
     webkitFilter: "blur(" + blurElement.a + "px)",
     filter: "blur(" + blurElement.a + "px)"
   });
@@ -48,7 +47,7 @@ Image.prototype.load = function(url, callback) {
 };
 
 function preloadImages() {
-  var images = $('img[src^="assets/images/"], img[src^="assets/svgs/"]');
+  var images = $('img[src*="assets/images/"], img[src*="assets/svgs/"]');
   var totalImages = images.length;
   var loadedImages = 0;
 
