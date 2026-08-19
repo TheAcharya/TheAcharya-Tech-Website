@@ -549,16 +549,6 @@ header {
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
-    transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.contact-button:hover svg rect {
-    fill: var(--text-color);
-}
-
-.contact-button:hover svg path {
-    stroke: var(--bg-color);
 }
 
 /* Tooltip, matches the sponsor button */
