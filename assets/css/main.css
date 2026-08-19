@@ -27,7 +27,7 @@ body {
 }
 
 .outer-container {
-  max-width: 1600px;
+  max-width: 1920px;
   margin: 0 auto;
   position: relative;
   padding: 0rem 3rem 3rem;
@@ -45,9 +45,9 @@ body {
 }
 
 .container {
-    max-width: 1400px;
+    max-width: 1840px;
     margin: 0 auto;
-    padding: 3rem 8rem;
+    padding: 3rem 3rem;
 }
 
 header {
@@ -85,6 +85,7 @@ header {
 
 .portfolio-description {
     margin: 0 auto;
+    max-width: 1140px;
     text-align: center;
     font-size: 1.0rem;
     line-height: 1.8;
@@ -276,13 +277,25 @@ header {
 
 }
 
-@media (max-width: 1024px) {
+/* Below ~1920px there isn't room for 3 cards at the original 2-column size */
+@media (max-width: 1800px) {
+    .outer-container {
+        max-width: 1600px;
+    }
+
     .container {
-        padding: 2rem;
+        max-width: 1400px;
+        padding: 3rem 8rem;
     }
 
     .projects-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 2rem;
     }
 }
 
