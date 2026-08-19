@@ -27,7 +27,7 @@ body {
 }
 
 .outer-container {
-  max-width: 1920px;
+  max-width: 1600px;
   margin: 0 auto;
   position: relative;
   padding: 0rem 3rem 3rem;
@@ -45,9 +45,9 @@ body {
 }
 
 .container {
-    max-width: 1840px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 3rem 3rem;
+    padding: 3rem 8rem;
 }
 
 header {
@@ -85,7 +85,6 @@ header {
 
 .portfolio-description {
     margin: 0 auto;
-    max-width: 1140px;
     text-align: center;
     font-size: 1.0rem;
     line-height: 1.8;
@@ -96,7 +95,7 @@ header {
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
     /* padding: 3rem 0; */
 }
@@ -275,22 +274,6 @@ header {
     /* padding: 0.6rem 1rem; */
 }
 
-}
-
-/* Below ~1920px there isn't room for 3 cards at the original 2-column size */
-@media (max-width: 1800px) {
-    .outer-container {
-        max-width: 1600px;
-    }
-
-    .container {
-        max-width: 1400px;
-        padding: 3rem 8rem;
-    }
-
-    .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 
 @media (max-width: 1024px) {
@@ -549,6 +532,16 @@ header {
     stroke-width: 2;
     stroke-linecap: round;
     stroke-linejoin: round;
+    transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.contact-button:hover svg rect {
+    fill: var(--text-color);
+}
+
+.contact-button:hover svg path {
+    stroke: var(--bg-color);
 }
 
 /* Tooltip, matches the sponsor button */
